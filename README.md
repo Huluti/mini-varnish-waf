@@ -7,6 +7,14 @@ Lightweight request filter in `vcl_recv` that blocks access to sensitive or heav
 This is **not primarily a security feature**.
 The main purpose is **performance optimization**, by avoiding unnecessary backend requests for paths that are almost always invalid or wasteful.
 
+## Better alternatives
+
+If you need a real security layer (beyond simple request filtering), prefer dedicated WAF solutions:
+
+- [Varnish WAF (ModSecurity integration)](https://docs.varnish-software.com/varnish-waf/modsecurity/)
+- Cloud WAF services
+- Reverse proxy/API gateways with filtering
+
 ## What it does
 
 It inspects the URL path and returns `404 Security-Check-Failed` for requests matching:
