@@ -38,6 +38,23 @@ Allows:
 Blocked requests return:
 `404 Security-Check-Failed`
 
+## Benchmarking
+
+While the WAF rules seems to incur a performance hit of 1–4% in raw throughput, the reduction in unnecessary backend load makes it a worthwhile trade-off for overall system stability.
+
+| Metric | Config 1 (Without WAF) | Config 2 (With WAF) | Difference |
+| :--- | :--- | :--- | :--- |
+| **Requests/sec** | 13,498.81 | 13,050.25 | -3.32% |
+| **Mean Time (ms)** | 7.408 | 7.663 | +0.255ms |
+| **Cache Hit Rate** | 99.99% | 99.99% | 0.00% |
+
+### To run the benchmark
+
+- `cd benchmark`
+- `docker compose up -d`
+- `chmod +x benchmark.sh`
+- `./benchmark.sh`
+
 ## Contributions
 
 Contributions are welcome.
