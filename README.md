@@ -50,10 +50,17 @@ While the WAF rules seems to incur a performance hit of 1–4% in raw throughput
 
 ### To run the benchmark
 
-- `cd benchmark`
-- `docker compose up -d`
-- `chmod +x benchmark.sh`
-- `./benchmark.sh`
+```bash
+make benchmark
+```
+
+## Tests
+
+### To run the test suite
+
+```bash
+make test
+```
 
 ## Contributions
 

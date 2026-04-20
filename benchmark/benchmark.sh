@@ -19,6 +19,10 @@ echo -e "${BLUE}Varnish Cache Benchmark Suite${NC}"
 echo -e "${BLUE}========================================${NC}"
 echo ""
 
+# Start the environment
+echo -e "${YELLOW}Starting Docker containers...${NC}"
+docker compose up -d --force-recreate --remove-orphans --wait
+
 # Check if both Varnish instances are running
 echo -e "${YELLOW}Checking Varnish instances...${NC}"
 if ! curl -s "$VARNISH1_URL" > /dev/null; then
@@ -136,3 +140,7 @@ fi
 echo ""
 
 echo -e "${GREEN}✓ Benchmark complete!${NC}"
+
+# Stop the environment
+echo -e "${YELLOW}Shutting down Docker containers...${NC}"
+docker compose down

@@ -5,7 +5,7 @@
 # Test the WAF rules against a live Varnish instance
 ####################################################
 
-TARGET="https://website-to-test.com"
+TARGET="http://localhost:6081"
 
 RED='\033[0;31m'
 GREEN='\033[0;32m'
@@ -16,6 +16,10 @@ NC='\033[0m' # No Color
 PASSED=0
 FAILED=0
 UNEXPECTED=0
+
+# Start the environment
+echo -e "${YELLOW}Starting Docker containers...${NC}"
+docker compose up -d --force-recreate --remove-orphans --wait
 
 function test_payload() {
     local payload="$1"
@@ -204,6 +208,10 @@ echo -e "${GREEN}Passed:${NC} $PASSED"
 echo -e "${RED}Failed:${NC} $FAILED"
 echo -e "${YELLOW}Errors:${NC} $ERRORS"
 echo -e "${BLUE}Total:${NC}  $TOTAL"
+
+# Stop the environment
+echo -e "${YELLOW}Shutting down Docker containers...${NC}"
+docker compose down
 
 if [[ $FAILED -eq 0 ]]; then
     echo -e "${GREEN}✅ All tests passed${NC}"
